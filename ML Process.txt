@@ -1,0 +1,17 @@
+- Started with 7251 frames of video (sampled at 30 FPS)
+- Reduced frame count to 6721 by removing frames associated with invalid gaze data
+- Split 6721 video frames into 3471 train samples and 3250 test samples
+
+How we ended up with our final feature set:
+
+- Started with 1,572,864 features (2048 * 768 * 1 pixels)
+- Too big to do anything
+- Cropped the video to nicely fit only one eye
+- Resulted in a set of 258,048 features (768 * 336 * 1 pixels) [16.4% of original feature set]
+- Able to use MATLAB's fitcsvm and predict methods (90.9% accuracy)
+- Removed all features where |weight| <= 10^(-4)
+- Resulted in a set of 6,108 highly weighted features [0.4% of original feature set]
+- Used MATLAB's fitcsvm and predict again (94.2% accuracy)
+- Used liblinear svm's train and predict methods (94.1% accuracy)
+
+How might performance change if head stabilization was used?
